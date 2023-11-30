@@ -78,6 +78,7 @@ public class KeycloakDeployment {
     protected TokenStore tokenStore = TokenStore.SESSION;
     protected String adapterStateCookiePath = "";
     protected String stateCookieName = "OAuth_Token_Request_State";
+    protected boolean useRealmRoleMappings;
     protected boolean useResourceRoleMappings;
     protected boolean cors;
     protected int corsMaxAge = -1;
@@ -409,7 +410,15 @@ public class KeycloakDeployment {
         this.stateCookieName = stateCookieName;
     }
 
-    public boolean isUseResourceRoleMappings() {
+    public boolean isUseRealmRoleMappings() {
+        return useRealmRoleMappings;
+    }
+
+    public void setUseRealmRoleMappings(boolean useRealmRoleMappings) {
+        this.useRealmRoleMappings = useRealmRoleMappings;
+    }
+
+   public boolean isUseResourceRoleMappings() {
         return useResourceRoleMappings;
     }
 

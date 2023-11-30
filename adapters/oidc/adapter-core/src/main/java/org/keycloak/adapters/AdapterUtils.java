@@ -27,6 +27,7 @@ import org.keycloak.representations.AccessToken;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,20 +45,21 @@ public class AdapterUtils {
     }
 
     public static Set<String> getRolesFromSecurityContext(RefreshableKeycloakSecurityContext session) {
-        Set<String> roles = null;
+        Set<String> roles = new HashSet<>();
         AccessToken accessToken = session.getToken();
         if (session.getDeployment().isUseResourceRoleMappings()) {
             if (log.isTraceEnabled()) {
-                log.trace("useResourceRoleMappings");
+                log.trace("use resource role mappings");
             }
             AccessToken.Access access = accessToken.getResourceAccess(session.getDeployment().getResourceName());
-            if (access != null) roles = access.getRoles();
-        } else {
+            if (access != null) roles.addAll(access.getRoles());
+        }
+        if (session.getDeployment().isUseRealmRoleMappings()) {
             if (log.isTraceEnabled()) {
                 log.trace("use realm role mappings");
             }
             AccessToken.Access access = accessToken.getRealmAccess();
-            if (access != null) roles = access.getRoles();
+            if (access != null) roles.addAll(access.getRoles());
         }
         if (roles == null) roles = Collections.emptySet();
         if (log.isTraceEnabled()) {

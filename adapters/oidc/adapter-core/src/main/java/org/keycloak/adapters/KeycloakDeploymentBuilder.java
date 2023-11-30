@@ -101,6 +101,7 @@ public class KeycloakDeploymentBuilder {
         deployment.setClientAuthenticator(bootstrapClientAuthenticator(adapterConfig));
 
         deployment.setPublicClient(adapterConfig.isPublicClient());
+        deployment.setUseRealmRoleMappings(adapterConfig.isUseRealmRoleMappings());
         deployment.setUseResourceRoleMappings(adapterConfig.isUseResourceRoleMappings());
 
         deployment.setExposeToken(adapterConfig.isExposeToken());

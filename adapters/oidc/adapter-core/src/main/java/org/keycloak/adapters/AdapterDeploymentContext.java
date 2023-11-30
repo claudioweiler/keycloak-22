@@ -323,6 +323,14 @@ public class AdapterDeploymentContext {
             return delegate.getStateCookieName();
         }
 
+        public boolean isUseRealmRoleMappings() {
+            return useRealmRoleMappings;
+        }
+        
+        public void setUseRealmRoleMappings(boolean useRealmRoleMappings) {
+            this.useRealmRoleMappings = useRealmRoleMappings;
+        }
+        
         @Override
         public void setStateCookieName(String stateCookieName) {
             delegate.setStateCookieName(stateCookieName);

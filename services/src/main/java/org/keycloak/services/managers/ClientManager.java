@@ -214,10 +214,12 @@ public class ClientManager {
 
     @JsonPropertyOrder({"realm", "realm-public-key", "bearer-only", "auth-server-url", "ssl-required",
             "resource", "public-client", "verify-token-audience", "credentials",
-            "use-resource-role-mappings"})
+            "use-realm-role-mappings", "use-resource-role-mappings"})
     public static class InstallationAdapterConfig extends BaseRealmConfig {
         @JsonProperty("resource")
         protected String resource;
+        @JsonProperty("use-realm-role-mappings")
+        protected Boolean useRealmRoleMappings;
         @JsonProperty("use-resource-role-mappings")
         protected Boolean useResourceRoleMappings;
         @JsonProperty("bearer-only")
@@ -230,6 +232,14 @@ public class ClientManager {
         protected Boolean verifyTokenAudience;
         @JsonProperty("policy-enforcer")
         protected PolicyEnforcerConfig enforcerConfig;
+
+        public Boolean isUseRealmRoleMappings() {
+            return useRealmRoleMappings;
+        }
+
+        public void setUseRealmRoleMappings(Boolean useRealmRoleMappings) {
+            this.useRealmRoleMappings = useRealmRoleMappings;
+        }
 
         public Boolean isUseResourceRoleMappings() {
             return useResourceRoleMappings;

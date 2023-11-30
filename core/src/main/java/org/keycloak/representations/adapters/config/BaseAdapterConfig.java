@@ -31,12 +31,14 @@ import java.util.TreeMap;
  */
 @JsonPropertyOrder({"realm", "realm-public-key", "auth-server-url", "ssl-required",
         "resource", "public-client", "credentials",
-        "use-resource-role-mappings",
+        "use-realm-role-mappings", "use-resource-role-mappings",
         "enable-cors", "cors-max-age", "cors-allowed-methods", "cors-exposed-headers",
         "expose-token", "bearer-only", "autodetect-bearer-only", "enable-basic-auth"})
 public class BaseAdapterConfig extends BaseRealmConfig {
     @JsonProperty("resource")
     protected String resource;
+    @JsonProperty("use-realm-role-mappings")
+    protected boolean useRealmRoleMappings = true;
     @JsonProperty("use-resource-role-mappings")
     protected boolean useResourceRoleMappings;
     @JsonProperty("enable-cors")
@@ -64,7 +66,15 @@ public class BaseAdapterConfig extends BaseRealmConfig {
      @JsonProperty("redirect-rewrite-rules")
     protected Map<String, String> redirectRewriteRules;
 
-    public boolean isUseResourceRoleMappings() {
+    public boolean isUseRealmRoleMappings() {
+        return useRealmRoleMappings;
+    }
+
+    public void setUseRealmRoleMappings(boolean useRealmRoleMappings) {
+        this.useRealmRoleMappings = useRealmRoleMappings;
+    }
+
+   public boolean isUseResourceRoleMappings() {
         return useResourceRoleMappings;
     }
 
